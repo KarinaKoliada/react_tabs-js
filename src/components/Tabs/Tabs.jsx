@@ -1,8 +1,6 @@
 import React from 'react';
 
 export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
-  const activeTab = tabs.find(tab => tab.id === activeTabId) || tabs[0];
-
   return (
     <div>
       <div className="tabs is-boxed">
@@ -10,7 +8,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
           {tabs.map(tab => (
             <li
               key={tab.id}
-              className={tab.id === activeTab.id ? 'is-active' : ''}
+              className={tab.id === activeTabId ? 'is-active' : ''}
               data-cy="Tab"
             >
               <a
@@ -18,7 +16,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
                 data-cy="TabLink"
                 onClick={e => {
                   e.preventDefault();
-                  if (tab.id !== activeTab.id) {
+                  if (tab.id !== activeTabId) {
                     onTabSelected(tab.id);
                   }
                 }}
@@ -31,7 +29,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
       </div>
 
       <div className="block" data-cy="TabContent">
-        {activeTab.content}
+        {tabs.find(tab => tab.id === activeTabId)?.content}
       </div>
     </div>
   );
