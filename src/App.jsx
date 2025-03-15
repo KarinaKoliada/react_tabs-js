@@ -12,12 +12,30 @@ export const tabs = [
 
 export const App = () => {
   const [activeTabId, setActiveTabId] = useState(tabs[0].id);
+  const [query, setQuery] = useState('');
 
   return (
     <div className="section">
       <h1 className="title">
         Selected tab is {tabs.find(tab => tab.id === activeTabId)?.title}
       </h1>
+
+      <div className="field">
+        <label htmlFor="search-query" className="label">
+          Search tab
+        </label>
+        <div className="control">
+          <input
+            type="text"
+            id="search-query"
+            className="input"
+            placeholder="Type search word"
+            value={query}
+            onChange={changeEvent => setQuery(changeEvent.target.value)}
+          />
+        </div>
+      </div>
+
       <Tabs
         tabs={tabs}
         activeTabId={activeTabId}
